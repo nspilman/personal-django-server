@@ -1,0 +1,2 @@
+#!/bin/sh
+git --work-tree=/home/nspilman/myprojectdir/mysite --git-dir = /home/nspilman/myprojectdir/mysite/site.git checkout -f
