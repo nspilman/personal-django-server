@@ -16,9 +16,6 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ADMINS = [('Nate','Nate.spilman@gmail.com')]
-EMAIL_HOST_USER = 'contact@artsonthehudson.com'
-EMAIL_HOST_PASSWORD = 'wehaveasituation'
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
