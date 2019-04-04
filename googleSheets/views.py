@@ -107,7 +107,7 @@ class weddingDocs(APIView):
         
         if submitFunction == "plusOneFood":
             responsePerson = [person for person in peopleArray if person['firstName'] == submitName][0]
-            guestList.update_cell(responsePerson['row'],foodCol,content['selection'])
+            guestList.update_cell(responsePerson['row'],plusOneFoodCol,content['selection'])
             return Response('check the doc')
         
         if submitFunction == "email":
