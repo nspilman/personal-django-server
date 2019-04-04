@@ -21,6 +21,7 @@ emailCol = 6
 rsvpCol = 18
 plus1Col = 23
 foodCol = 24
+plusOneFoodCol = 25
 
 #loginList
 llGroupCol = 1
@@ -100,6 +101,11 @@ class weddingDocs(APIView):
             return Response('check the doc')
         
         if submitFunction == "food":
+            responsePerson = [person for person in peopleArray if person['firstName'] == submitName][0]
+            guestList.update_cell(responsePerson['row'],foodCol,content['selection'])
+            return Response('check the doc')
+        
+        if submitFunction == "plusOneFood":
             responsePerson = [person for person in peopleArray if person['firstName'] == submitName][0]
             guestList.update_cell(responsePerson['row'],foodCol,content['selection'])
             return Response('check the doc')
