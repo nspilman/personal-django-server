@@ -19,11 +19,12 @@ from .routers import router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('TravelBlog.urls')),
+    path('travel',include('TravelBlog.urls')),
     path('jobhunt',include('jobhunt.urls')),
+    path('wedding',include('weddingPlanning.urls')),
     path('pyrrhic',include('pyrrhic.urls')),
     path('gsheet',include('googleSheets.urls')),
     path('blog',include('blogComments.urls')),
-    path('api/', include(router.urls)),
+    path('api', include(router.urls)),
     # path('travel'),include('TravelBlog.urls')
 ]
