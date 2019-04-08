@@ -16,15 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .routers import router
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('travel',include('TravelBlog.urls')),
-    path('jobhunt',include('jobhunt.urls')),
-    path('wedding',include('weddingPlanning.urls')),
-    path('pyrrhic',include('pyrrhic.urls')),
-    path('gsheet',include('googleSheets.urls')),
-    path('blog',include('blogComments.urls')),
-    path('api', include(router.urls)),
+    path('travel/',include('TravelBlog.urls')),
+    path('jobhunt/',include('jobhunt.urls')),
+    path('wedding/',include('weddingPlanning.urls')),
+    path('pyrrhic/',include('pyrrhic.urls')),
+    path('gsheet/',include('googleSheets.urls')),
+    path('blog/',include('blogComments.urls')),
+    path('events/',include('event_application.urls')),
+    path('api/', include(router.urls)),
+    path('',include('frontend.urls')),
     # path('travel'),include('TravelBlog.urls')
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

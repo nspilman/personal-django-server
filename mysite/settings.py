@@ -38,11 +38,14 @@ INSTALLED_APPS = [
 
     #myApps
     'weddingPlanning',
-        'TravelBlog',
-        'mgNameGen',
-        'blogComments',
-        'pyrrhic',
-        'jobhunt',
+    'TravelBlog',
+    'mgNameGen',
+    'blogComments',
+    'pyrrhic',
+    'jobhunt',
+    'event_application',
+    'frontend',
+
 ]
 
 
