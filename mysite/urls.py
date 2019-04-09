@@ -29,6 +29,6 @@ urlpatterns = [
     path('blog/',include('blogComments.urls')),
     path('events/',include('event_application.urls')),
     path('api/', include(router.urls)),
-    path('',include('frontend.urls')),
+    path('frontend/',include('frontend.urls')),
     # path('travel'),include('TravelBlog.urls')
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -2,16 +2,25 @@ console.log('you found me! Woohoo!')
 
 const event =  {
     template: `
-    <div>
-        <li>
-            {{event.name}}
-        </li>
+    <div class = "container eventCard card p-3">
+          <h1> {{event.name}}</h1>
+          <h4>{{date}}</h4>
     </div>`,
     data(){
         return{
         }
     },
-    props:['event']
+    computed:{
+        date(){
+            const {startdate, enddate} = this.event
+            console.log(startdate === enddate)
+            if(startdate === enddate){
+                let date = startdate;
+                return new Date(date).toDateString()  
+            } 
+        }
+    },
+    props:['event'],
     }
 
 var app = new Vue({

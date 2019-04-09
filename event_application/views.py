@@ -1,13 +1,26 @@
 from django.shortcuts import render
+from django.db.models import Q
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 import json
 from rest_framework.views import APIView
-from .models import Event
+from .models import Event, Eventprofile
+from .mockup_tools import fakeuser
+import random
+
 
 class AllEvents(APIView):  
     def get(self,request):
-        events = [{'name':event.name} for event in Event.objects.all()]
+        events = [{
+            'id':event.id,
+            'name':event.name,
+            'created_user':str(event.created_user), 
+            'startdate':event.startdate,
+            'enddate':event.enddate,
+            'starttime':event.starttime,
+            'endtime':event.endtime
+            } 
+            for event in Event.objects.all()]
         return Response(events)
     
     def post(self,request):
@@ -49,7 +62,10 @@ class Users(APIView):
 
     def post(self,request):
         user_data = request.data['body']
-        # user = User.objects.create_user('testUserOne', 'lennon@thebeatles.com', 'johnpassword')
+        username = request.data['username']
+        user = User.objects.create_user(username, 'lennon@thebeatles.com', 'johnpassword')
+        user.eventprofile.event_user = True
+        user.save()
         return Response(user_data)
 
 class Signups(APIView):
@@ -58,10 +74,10 @@ class Signups(APIView):
             events = [event.id for event in Event.objects.all()]
         else:
             try:
-                events = [event.id for event in Event.objects.filter(attendees__username = user)]
+                events = [event.name for event in Event.objects.filter(attendees__username = user)]
             except:
                 events = []
-        return Response({'hey':events})
+        return Response({'signups':events})
 
     def post(self,request):
         data = request.data
@@ -71,6 +87,19 @@ class Signups(APIView):
         event.save()
         # user = User.objects.create_user('testUserOne', 'lennon@thebeatles.com', 'johnpassword')
         return Response({'attendees':event.id})
+
+class eventSignups(APIView):
+    def get(self,request, event = ""):
+        if event == "":
+            events = [event.id for event in Event.objects.all()]
+        else:
+            try:
+                eventObj = Event.objects.get(id = event)
+                attendees = [user.username for user in eventObj.attendees.all()]
+            except:
+                users = []
+        return Response({'attendees':attendees})
+
 
 class Remove(APIView):
     def post(self,request):
@@ -91,5 +120,43 @@ class CreatedBy(APIView):
                 events = [event.name for event in Event.objects.filter(created_user__username = user)]
             except:
                 events = []
-        return Response({'hey':events})
+        return Response({'created':events})
+
+class Mockup(APIView):
+    def post(self,request):
+        data = request.data
+        number = data['number']
+        function = data['function']
+
+        if function == 'user':
+            for i in range(0,number):
+                user_data = fakeuser()
+                user = User.objects.create_user(user_data['username'], user_data['email'], user_data['password'])
+                user.eventprofile.event_user = True
+                user.save()
+            return Response({'200':f'created {number} user(s)'})
+        if function == 'event':
+            for i in range(0,number):
+                user_index = random.randint(0,len(User.objects.all())-1)
+                created_user = User.objects.all()[user_index]
+                event = Event(
+                    name="the bestest event around",
+                    created_user=created_user,
+                    startdate="2019-01-01",
+                    enddate="2019-01-01",
+                    starttime="12:00",
+                    endtime="13:00"
+                    )
+                event.save()
+            return Response({'200':f'created {number} event(s)'})
+        if function == 'attend':
+            for i in range(0,number):
+                user_index = random.randint(0,len(User.objects.all())-1)
+                user = User.objects.all()[user_index]
+                event_index = random.randint(0,len(Event.objects.all())-1)
+                event = Event.objects.all()[event_index]
+                event.attendees.add(user)
+                event.save()
+            return Response({'200':f'signed up {number} person(s) for an event'})
+            
 

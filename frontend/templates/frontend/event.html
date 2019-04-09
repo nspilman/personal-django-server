@@ -6,7 +6,10 @@
             <event v-for ="event in events" :event="event"/>
         </div>
 </body>
-<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+
+<script> const event = "{{ event }}" </script>
+
+<script type="text/javascript" src="{% static 'js/event.js' %}"></script>
 <!-- <script src="./js/main.js"></script> -->
 </html>
 {% endblock %}
