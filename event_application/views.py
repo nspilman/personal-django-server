@@ -140,7 +140,7 @@ class Mockup(APIView):
                 user_index = random.randint(0,len(User.objects.all())-1)
                 created_user = User.objects.all()[user_index]
                 event = Event(
-                    name="the bestest event around",
+                    name=created_user.username + "'s awesome event",
                     created_user=created_user,
                     startdate="2019-01-01",
                     enddate="2019-01-01",
