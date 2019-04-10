@@ -6,6 +6,7 @@ def fakeuser():
     username = (fake.name().replace(" ","").lower())
     email = fake.email()
     password = "rockon"
-
     return {'username':username,'email':email,'password':password}
 
+def fakeaddress():
+    return fake.address()

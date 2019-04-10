@@ -3,25 +3,31 @@
 {% block head %}
 {% load staticfiles %}
         <div id ="app">
-            <h3 class = 'p-3'>Signups</h3>
+            <h3 class = 'p-2'>Signups</h2>
          <div class = "row px-5 m-3">
             <div class = 'col-sm-4' v-for ="signup in signups">
-                <h3>${signup}</h3>
+                <h3>${signup.name}</h3>
                 <img :src="`https://source.unsplash.com/300x200/?event/${signup}`"/>
             </div>
         </div>
    
-        <h3 class = 'p-3'>Events Created</h3>
+        <h2 class = 'p-3'>Events Created</h2>
             <div class = "row px-5 m-3">
+                
                     <div class = "col-sm-4" v-for ="event in created">
-                            <h3>${event}</h3>
-                            <img :src="`https://source.unsplash.com/300x200/?event/${event}`"/>
+                            <a :href ="'/frontend/event/'+event.id"> 
+                            <h6>${event.name}</h6>
+                            <img :src="`https://source.unsplash.com/300x200/?event/${event.id}`"/>
+                            </a>
+                            <h6>${event.startdate}</h6>
                         </div>
+                    
                     <!--  -->
             </div>
             
         </ul>
         </div>
+    </div>
 </body>
 <script> const username = "{{ username }}" </script>
 <script type="text/javascript" src="{% static 'js/person.js' %}"></script>

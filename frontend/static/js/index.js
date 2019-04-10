@@ -2,20 +2,29 @@ console.log('you found me! Woohoo!')
 
 const event =  {
     template: `
-    <div class = "eventCard card p-4">
-    <div class = "row">
-        <div class = "col-sm-3">
+    <div class = "eventCard col-sm-4 card p-4">
         <a :href="eventLink">
-        <img :src="imageUrl"/>
+            <div class = 'text-center'>
+                <img :src="imageUrl" class = "p-3"/>
+            </div>
         </a>
+        <div class = "px-5">
+            <h4> 
+                {{event.name}}
+            </h4>
+            <h6>
+                {{date}}
+            </h6>
+            <h6 v-if="attendees">
+                attendees: {{attendees.length}}
+            </h6>
+            <h6 >
+                Host:
+                <a :href="'/frontend/person/'+event.created_user"> 
+                    {{event.created_user}}
+                </a>
+            </h6>
         </div>
-        <div class = "col-sm-9">
-          <h1> {{event.name}}</h1>
-          <h4>{{date}}</h4>
-          <h6 v-if="attendees">attendees: {{attendees.length}}</h6>
-          <h6 >Host:<a :href="'/frontend/person/'+event.created_user"> {{event.created_user}}</a></h6>
-          </div>
-          </div>
     </div>`,
     data(){
         return{
@@ -59,7 +68,6 @@ var app = new Vue({
         const resp = await axios.get('/events');
         const data = await resp.data;
         this.events = await data
-        console.log(this.events)
         }
     },
     delimiters:['${','}'],

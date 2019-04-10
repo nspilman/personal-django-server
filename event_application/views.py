@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from django.db.models import Q
+from django.forms.models import model_to_dict
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 import json
 from rest_framework.views import APIView
 from .models import Event, Eventprofile
-from .mockup_tools import fakeuser
+from .mockup_tools import fakeuser, fakeaddress
 import random
+from django.contrib.auth import authenticate, login
 
 
 class AllEvents(APIView):  
@@ -16,6 +18,7 @@ class AllEvents(APIView):
             'name':event.name,
             'created_user':str(event.created_user), 
             'startdate':event.startdate,
+            'address':event.address,
             'enddate':event.enddate,
             'starttime':event.starttime,
             'endtime':event.endtime
@@ -43,7 +46,7 @@ class AllEvents(APIView):
             endtime = data['endtime']
         except:
             endtime = ""
-        event = Event(name=name,created_user=created_user,startdate = startdate, enddate = enddate, starttime = starttime,endtime = endtime)
+        event = Event(name=name,created_user=created_user,startdate = startdate, enddate = enddate, starttime = starttime,endtime = endtime, address=fakeaddress())
         event.save()
         # user = User.objects.create_user('testUserOne', 'lennon@thebeatles.com', 'johnpassword')
         return Response({'response':f'new event created - {name}'})
@@ -74,10 +77,19 @@ class Signups(APIView):
             events = [event.id for event in Event.objects.all()]
         else:
             try:
-                events = [event.name for event in Event.objects.filter(attendees__username = user)]
+                events = [{
+                    'id':event.id,
+                    'name':event.name,
+                    'created_user':str(event.created_user), 
+                    'address':event.address,
+                    'startdate':event.startdate,
+                    'enddate':event.enddate,
+                    'starttime':event.starttime,
+                    'endtime':event.endtime
+            } for event in Event.objects.filter(attendees__username = user)]
             except:
                 events = []
-        return Response({'signups':events})
+        return Response(events)
 
     def post(self,request):
         data = request.data
@@ -93,12 +105,19 @@ class eventSignups(APIView):
         if event == "":
             events = [event.id for event in Event.objects.all()]
         else:
-            try:
                 eventObj = Event.objects.get(id = event)
+                event = {
+                    'id':eventObj.id,
+                    'name':eventObj.name,
+                    'created_user':str(eventObj.created_user), 
+                    'address':eventObj.address,
+                    'startdate':eventObj.startdate,
+                    'enddate':eventObj.enddate,
+                    'starttime':eventObj.starttime,
+                    'endtime':eventObj.endtime,
+            } 
                 attendees = [user.username for user in eventObj.attendees.all()]
-            except:
-                users = []
-        return Response({'attendees':attendees})
+        return Response({'event_info':event,'attendees':attendees})
 
 
 class Remove(APIView):
@@ -117,10 +136,19 @@ class CreatedBy(APIView):
             events = [event.name for event in Event.objects.all()]
         else:
             try:
-                events = [event.name for event in Event.objects.filter(created_user__username = user)]
+                events = [{
+                    'id':event.id,
+                    'name':event.name,
+                    'created_user':str(event.created_user), 
+                    'address':event.address,
+                    'startdate':event.startdate,
+                    'enddate':event.enddate,
+                    'starttime':event.starttime,
+                    'endtime':event.endtime,
+                    } for event in Event.objects.filter(created_user__username = user)]
             except:
                 events = []
-        return Response({'created':events})
+        return Response(events)
 
 class Mockup(APIView):
     def post(self,request):
@@ -135,6 +163,7 @@ class Mockup(APIView):
                 user.eventprofile.event_user = True
                 user.save()
             return Response({'200':f'created {number} user(s)'})
+
         if function == 'event':
             for i in range(0,number):
                 user_index = random.randint(0,len(User.objects.all())-1)
@@ -142,6 +171,7 @@ class Mockup(APIView):
                 event = Event(
                     name=created_user.username + "'s awesome event",
                     created_user=created_user,
+                    address = fakeaddress(),
                     startdate="2019-01-01",
                     enddate="2019-01-01",
                     starttime="12:00",
@@ -158,5 +188,24 @@ class Mockup(APIView):
                 event.attendees.add(user)
                 event.save()
             return Response({'200':f'signed up {number} person(s) for an event'})
-            
+        if function == 'burnitdown':
+            # try:
+                if data['burnitdown']=="burn":
+                    User.objects.filter(eventprofile__event_user=True).delete()
+                    Event.objects.all().delete()
+                else:
+                    return Response({'401':'Wrong Password'})
+                return Response({'200':"There's nothing left"})
+            # except:
+                # return Response({'401':'Missing stuff, man'})
 
+class Login(APIView):
+    def post(self,request):
+        username = request.POST['username']
+        password = request.POST['password']    
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return Response({'200':"You're logged in!"})
+        else:
+            return Response({'401':'We dont know who you are, bruv'})

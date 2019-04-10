@@ -3,27 +3,25 @@ var app = new Vue({
     },
     el: '#app',
     data: {
-      signups:null,
-      created:null,
+      event:null,
+      attendees:null,
+      imgUrl: "https://source.unsplash.com/1600x900/?events/" + event
+      
     },
     methods:{
-       async getSignups(){
-        const resp = await axios.get(`/events/usersignups/${username}`);
+       async getEvents(){
+        const resp = await axios.get(`/events/eventsignups/${event}`);
         const data = await resp.data;
-        const signups = await data.signups
-        this.signups = await signups
+        const {event_info, attendees} = await data
+        this.attendees = await attendees
+        this.event = await event_info
+        console.log(this.event)
         },
-        async getCreated(){
-            const resp = await axios.get(`/events/createdby/${username}`);
-            const data = await resp.data;
-            const created = await data.created;
-            this.created = await created;
-        }
-
     },
     delimiters:['${','}'],
     created(){
-       this.getSignups()
-       this.getCreated()
+      this.getEvents()
+    },
+    computed:{
     }
   })

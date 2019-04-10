@@ -1,0 +1,40 @@
+
+{% extends './header.html' %}
+{% block head %}
+{% load staticfiles %}
+
+<div id ="app">
+        <form>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Event Name</label>
+                  <input type="text" class="form-control" v-model="name" id="eventName" placeholder="Event Name">
+                  <small id="emailHelp" class="form-text text-muted">Make it fun!</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Creating User</label>
+                    <input type="text" v-model="created_user" class="form-control" id="username" placeholder="username">
+                </div>
+                <div class="form-group">
+                        <label for="exampleInputEmail1">Address</label>
+                        <input type="address" v-model="address" class="form-control" id="address" placeholder="address">
+                    </div>
+                <div class="form-group row">
+                        <label for="example-datetime-local-input" class="col-2 col-form-label">Start Date and time</label>
+                        <div class="col-10">
+                          <input class="form-control" v-model="startdatetime" type="datetime-local" value="2019-08-19T13:45:00" id="example-datetime-local-input">
+                        </div>
+                      </div>
+                <div class="form-group row">
+                    <label for="example-datetime-local-input" class="col-2 col-form-label">End Date and time</label>
+                    <div class="col-10">
+                        <input class="form-control" v-model="enddatetime" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+</div>
+</body>
+<script type="text/javascript" src="{% static 'js/newevent.js' %}"></script>
+<!-- <script src="./js/main.js"></script> -->
+</html>
+{% endblock %}

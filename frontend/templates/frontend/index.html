@@ -3,8 +3,11 @@
 {% block head %}
 {% load staticfiles %}
         <div id ="app">
-            <event v-for ="event in events" :event="event"/>
+            <div class = "row">
+                <event v-for ="event in events" :event="event"/>
+            </div>
         </div>
+</wrapper>
 </body>
 <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
 <!-- <script src="./js/main.js"></script> -->

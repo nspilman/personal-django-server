@@ -2,13 +2,35 @@
 {% extends './header.html' %}
 {% block head %}
 {% load staticfiles %}
-        <div id ="app">
-            <event v-for ="event in events" :event="event"/>
+<div id ="app">
+    <div class = "row px-3" v-if="event">
+        <div class = "col-sm-6 py-3">
+       <h5 class = 'text-left'> ${event.name} </h5>
+       <h6 class = "text-left pb-3">hosted by: 
+           <a :href="'/frontend/person/' + event.created_user" >
+           ${event.created_user}
+        </a>
+        </h6>
+       <div class = "container text-center">
+            <img :src ="imgUrl" class = "w-100"/>
         </div>
-</body>
+    </div>
+    <div class = "col-sm-6 py-5">
+        <h4>Los Deets</h4>
+        <h6>Address: ${event.address}</h6>
+        <h6>${event.startdate}</h6>
 
+        <h6>${event.starttime}</h6>
+        <h4 class = "pt-3">Who's Coming?</h4>
+        <h6 v-for="attendee in attendees">
+            <a :href="'/frontend/person/' +attendee">
+            ${attendee}</h6>
+        </a>
+    </div>
+    </div>
+       </div>
+    </body>
 <script> const event = "{{ event }}" </script>
-
 <script type="text/javascript" src="{% static 'js/event.js' %}"></script>
 <!-- <script src="./js/main.js"></script> -->
 </html>

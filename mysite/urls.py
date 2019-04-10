@@ -28,6 +28,7 @@ urlpatterns = [
     path('gsheet/',include('googleSheets.urls')),
     path('blog/',include('blogComments.urls')),
     path('events/',include('event_application.urls')),
+    path('jdsb/',include('jdsb.urls')),
     path('api/', include(router.urls)),
     path('frontend/',include('frontend.urls')),
     # path('travel'),include('TravelBlog.urls')
