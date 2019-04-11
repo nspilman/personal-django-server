@@ -9,23 +9,29 @@ var app = new Vue({
       loggedIn:false,
     },
     methods:{
-       async sendLogin(){
-        const resp = await axios.get('/events');
-        const data = await resp.data;
-        this.events = await data
+        async loginStatus(){
+            const resp = await axios.get('/events/login/')
+            const data = await resp.data
+            this.loggedIn = await data
         },
         async postLogin(){
-            axios.post(
+          const resp = await axios.post(
                 '/events/login/',
                 {
                     username:this.username,
                     password:this.password
                 }
-            ).then(resp => console.log(resp))
+            )
+            const status = await resp.status
+            if (status === 200){
+                this.loggedIn = true;
+            }
+            console.log(status)
         }
     },
     delimiters:['${','}'],
     created(){
+        this.loginStatus()
     },
   })
 

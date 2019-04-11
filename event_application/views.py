@@ -212,5 +212,8 @@ class Login_Class(APIView):
             return Response({'401':'We dont know who you are, bruv'})
 
     def get(self,request):
-        return Response({'logged_in':request.user.username})
+        if request.user.username:
+            return Response(True)
+        else:
+            return Response(False)
 
