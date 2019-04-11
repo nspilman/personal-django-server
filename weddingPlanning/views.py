@@ -16,9 +16,11 @@ firstNameCol = 2
 lastNameCol = 3
 emailCol = 6
 rsvpCol = 18
+rehearsal_dinner_rsvp_col = 22
 plus1Col = 23
 foodCol = 24
 plusOneFoodCol = 25
+rsvp_note_col = 30
 
 #loginList
 llGroupCol = 1
@@ -90,6 +92,16 @@ class weddingDocs(APIView):
         if submitFunction == "rsvp":
             responsePerson = [person for person in peopleArray if person['firstName'] == submitName][0]
             guestList.update_cell(responsePerson['row'],rsvpCol,content['rsvp'])
+            return Response('check the doc')
+        
+        if submitFunction == "rsvp_rehearsal":
+            responsePerson = [person for person in peopleArray if person['firstName'] == submitName][0]
+            guestList.update_cell(responsePerson['row'],rehearsal_dinner_rsvp_col,content['rsvp'])
+            return Response('check the doc')
+        
+        if submitFunction == "rsvp_note":
+            responsePerson = [person for person in peopleArray if person['firstName'] == submitName][0]
+            guestList.update_cell(responsePerson['row'],rsvp_note_col,content['note'])
             return Response('check the doc')
         
         if submitFunction == "plus1":

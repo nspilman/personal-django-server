@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+{% load staticfiles %}
 <html>
 <head>
     <meta charset="utf-8">
@@ -12,10 +14,20 @@
 </head>
 <body>
     <header>
-<div class = "p-2 ml-3 bg-light">
-   <a href = "/frontend/"><h1> Eventually </h1> </a>
+<div class = "p-2 ml-3 bg-light row">
+    <div class = "col-sm-9">
+        <a href = "/frontend/">
+            <h1> Eventually </h1> 
+        </a>
+    </div>
+    <div class = "col-sm-3" id = "login-form">
+        <login-form/>
+
+    </div>
 </div>
     </header>
     <div class = "p-2">
+            <script type="text/javascript" src="{% static 'js/login.js' %}"></script>
+
 {% block head %}{% endblock %}
     

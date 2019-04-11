@@ -199,13 +199,18 @@ class Mockup(APIView):
             # except:
                 # return Response({'401':'Missing stuff, man'})
 
-class Login(APIView):
+class Login_Class(APIView):
     def post(self,request):
-        username = request.POST['username']
-        password = request.POST['password']    
+        # return Response(request.data)
+        username = request.data['username']
+        password = request.data['password']    
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             return Response({'200':"You're logged in!"})
         else:
             return Response({'401':'We dont know who you are, bruv'})
+
+    def get(self,request):
+        return Response({'logged_in':request.user.username})
+

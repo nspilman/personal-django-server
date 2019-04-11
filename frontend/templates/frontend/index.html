@@ -2,6 +2,9 @@
 {% extends './header.html' %}
 {% block head %}
 {% load staticfiles %}
+<div class = "jumbotron">
+{{user}}
+</div>
         <div id ="app">
             <div class = "row">
                 <event v-for ="event in events" :event="event"/>
@@ -9,6 +12,7 @@
         </div>
 </wrapper>
 </body>
+<!-- <script>console.log("{{name}}")</script> -->
 <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
 <!-- <script src="./js/main.js"></script> -->
 </html>
