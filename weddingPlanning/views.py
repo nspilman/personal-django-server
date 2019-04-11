@@ -123,5 +123,5 @@ class weddingDocs(APIView):
             responsePerson = [guestList.update_cell(person['row'],emailCol,content['email']) for person in peopleArray]
             return Response('check the doc')
 
-        return Response({"response":attempt})
+        return Response({"response":'email'})
 
