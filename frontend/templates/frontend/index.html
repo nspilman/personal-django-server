@@ -2,9 +2,7 @@
 {% extends './header.html' %}
 {% block head %}
 {% load staticfiles %}
-<div class = "jumbotron">
-{{user}}
-</div>
+
         <div id ="app">
             <div class = "row">
                 <event v-for ="event in events" :event="event"/>

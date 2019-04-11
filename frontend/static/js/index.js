@@ -1,5 +1,3 @@
-console.log('you found me! Woohoo!')
-
 const event =  {
     template: `
     <div class = "eventCard col-sm-4 card p-4">

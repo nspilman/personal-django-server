@@ -18,11 +18,15 @@
     <div class = "col-sm-9">
         <a href = "/frontend/">
             <h1> Eventually </h1> 
+            {{user}}
         </a>
     </div>
     <div class = "col-sm-3" id = "login-form">
-        <login-form/>
-
+            <input v-model="username">
+            </input>
+            <input v-model="password">
+            </input>
+            <button @click="postLogin">Submit</button>
     </div>
 </div>
     </header>
