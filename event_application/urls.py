@@ -9,6 +9,7 @@ urlpatterns = [
     path('',views.AllEvents.as_view()),
     path('users/', views.Users.as_view()),
     path('login/',views.Login_Class.as_view()),
+    path('logout/',views.Logout_Class.as_view()),
     #endpoint used to check if a user exists
     path('users/<user>/', views.Users.as_view()),
     path('remove/', views.Remove.as_view()),

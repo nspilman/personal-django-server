@@ -29,6 +29,13 @@
             </input>
             <button @click="postLogin">Submit</button>
         </template>
+        <template v-if="loggedIn">
+              <button class ="btn btn-danger px-5 py-3" @click="postLogout">
+                  Logout
+            </button>
+        </template>
+            
+
     </div>
 </div>
     </header>

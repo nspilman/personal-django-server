@@ -8,8 +8,8 @@ from rest_framework.views import APIView
 from .models import Event, Eventprofile
 from .mockup_tools import fakeuser, fakeaddress
 import random
-from django.contrib.auth import authenticate, login
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 class AllEvents(APIView):  
     def get(self,request):
@@ -217,3 +217,12 @@ class Login_Class(APIView):
         else:
             return Response(False)
 
+class Logout_Class(APIView):
+
+    def get(self,request):
+        try:
+            logout(request)
+            return Response({200:"You're logged out!"})
+        except:
+            return Response({401:"You're gonna be logged in forever, man"})
+        

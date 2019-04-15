@@ -27,7 +27,16 @@ var app = new Vue({
                 this.loggedIn = true;
             }
             console.log(status)
-        }
+        },
+        async postLogout(){
+            const resp = await axios.get('/events/logout/')
+              const status = await resp.status
+              if (status === 200){
+                  this.loggedIn = false;
+              }
+              console.log(status)
+          }
+        
     },
     delimiters:['${','}'],
     created(){
