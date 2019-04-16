@@ -94,13 +94,13 @@ class weddingDocs(APIView):
         if submitFunction == "rsvp":
             responsePerson = [person for person in peopleArray if person['firstName'] == submitName][0]
             guestList.update_cell(responsePerson['row'],rsvpCol,content['rsvp'])
-            sendEmail(email,password,"nate.spilman@gmail.com",'New RSVP!', 'New Wedding RSVP from ' + responsePerson['firstName'] + " " + responsePerson['lastName'], responsePerson['firstName'] + " " + responsePerson['lastName'] + " responded:" + content['rsvp'])
+            [sendEmail(email,password,recipient,'New RSVP!', 'New Wedding RSVP from ' + responsePerson['firstName'] + " " + responsePerson['lastName'], responsePerson['firstName'] + " " + responsePerson['lastName'] + " responded:" + content['rsvp']) for recipient in ['nate.spilman@gmail.com','csherland@yahoo.com']]
             return Response('check the doc')
         
         if submitFunction == "rsvp_rehearsal":
             responsePerson = [person for person in peopleArray if person['firstName'] == submitName][0]
             guestList.update_cell(responsePerson['row'],rehearsal_dinner_rsvp_col,content['rsvp'])
-            sendEmail(email,password,"nate.spilman@gmail.com",'New Rehearsal Dinner RSVP!', 'New Rehearsal Dinner RSVP from ' + responsePerson['firstName'] + " " + responsePerson['lastName'], responsePerson['firstName'] + " " + responsePerson['lastName'] + " responded:" + content['rsvp'])
+            [sendEmail(email,password,recipient,'New Rehearsal Dinner RSVP!', 'New Rehearsal Dinner RSVP from ' + responsePerson['firstName'] + " " + responsePerson['lastName'], responsePerson['firstName'] + " " + responsePerson['lastName'] + " responded:" + content['rsvp'])] for recipient in ['nate.spilman@gmail.com','csherland@yahoo.com']]
             return Response('check the doc')
         
         if submitFunction == "rsvp_note":
