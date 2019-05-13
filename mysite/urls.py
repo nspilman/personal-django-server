@@ -21,6 +21,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('wlbny/', include('wlbny.urls')),
     path('travel/',include('TravelBlog.urls')),
     path('jobhunt/',include('jobhunt.urls')),
     path('wedding/',include('weddingPlanning.urls')),
@@ -31,5 +32,6 @@ urlpatterns = [
     path('jdsb/',include('jdsb.urls')),
     path('api/', include(router.urls)),
     path('frontend/',include('frontend.urls')),
+    path("stripe/", include("djstripe.urls", namespace="djstripe")),
     # path('travel'),include('TravelBlog.urls')
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -19,7 +19,7 @@ ADMINS = [('Nate','Nate.spilman@gmail.com')]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = ['142.93.245.126','localhost:8000','localhost','natespilman.tech']
+ALLOWED_HOSTS = ['142.93.245.126','localhost:8000','localhost','natespilman.tech','36c2e9c6.ngrok.io']
 
 # Application definition
 
@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'djstripe',
 
     #myApps
     'weddingPlanning',
