@@ -6,6 +6,5 @@ from django.conf import settings
 from . import views
 
 urlpatterns = [
-    path('resources/', views.getResources.as_view(), name = 'resources'),
-    path('events/', views.getEvents.as_view(), name = 'events'),
+    path('', views.index, name = 'stripe'),
 ]
