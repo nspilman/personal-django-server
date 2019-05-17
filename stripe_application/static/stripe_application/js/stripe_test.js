@@ -5,8 +5,7 @@ checkoutButton.addEventListener('click', function () {
   // When the customer clicks on the button, redirect
   // them to Checkout.
   stripe.redirectToCheckout({
-    items: [{sku: 'sku_F4BvA7cLXZxsES', quantity: 1},
-            {sku: 'sku_F5JZ5IWWvd7xRr', quantity: 1}],
+    items: [{sku: 'sku_F5JZ5IWWvd7xRr', quantity: 1}],
 
     // Do not rely on the redirect to the successUrl for fulfilling
     // purchases, customers may not always reach the success_url after
