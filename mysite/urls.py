@@ -33,5 +33,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('frontend/',include('frontend.urls')),
     path("stripe/", include("stripe_application.urls")),
+    path("", include("landingpage.urls")),
     # path('travel'),include('TravelBlog.urls')
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
