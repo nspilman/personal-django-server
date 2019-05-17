@@ -1,30 +1,23 @@
-{% load static %}
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-    <link rel="stylesheet" href="{% static 'stripe_application/css/main.css'%}">
-    <script src="https://js.stripe.com/v3/"></script>
+        <script src="https://js.stripe.com/v3/"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stripe Test</title>
 </head>
-<section id = "main">
 <body>
-    <div class = "wrapper">
-<form action="/charge" method="post" id="payment-form" class = "StripeElement">
-  <div class="form-row">
-    <label for="card-element">
-      Credit or debit card
-    </label>
-    <div id="card-element">
-      <!-- A Stripe Element will be inserted here. -->
-    </div>
-
-    <!-- Used to display form errors. -->
-    <div id="card-errors" role="alert"></div>
-  </div>
-
-  <button>Submit Payment</button>
-</form>
-</div>
-</section>
+        <button
+        style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+        id="checkout-button-sku_F5JZ5IWWvd7xRr"
+        role="link"
+      >
+        Checkout
+      </button>
+      
+      <div id="error-message"></div>
+    
 </body>
-
-<script type="text/javascript" src="{% static 'stripe_application/js/index.js' %}"></script>
+<script src="./index.js"></script>
+</html>

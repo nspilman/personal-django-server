@@ -1,29 +1,27 @@
-// Create a Stripe client.
-var stripe = Stripe('pk_test_I5zH7Kv2DKFo1gT40IHtu4xj009znB7e9j');
+var stripe = Stripe('pk_live_L3DnVrjgBupynZtWEHe7XCnH00cP0TAQHZ');
 
-// Create an instance of Elements.
-var elements = stripe.elements();
+var checkoutButton = document.getElementById('checkout-button-sku_F5JZ5IWWvd7xRr');
+checkoutButton.addEventListener('click', function () {
+  // When the customer clicks on the button, redirect
+  // them to Checkout.
+  stripe.redirectToCheckout({
+    items: [{sku: 'sku_F4BvA7cLXZxsES', quantity: 1},
+            {sku: 'sku_F5JZ5IWWvd7xRr', quantity: 1}],
 
-// Custom styling can be passed to options when creating an Element.
-// (Note that this demo uses a wider set of styles than the guide below.)
-var style = {
-  base: {
-    color: '#32325d',
-    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-    fontSmoothing: 'antialiased',
-    fontSize: '16px',
-    '::placeholder': {
-      color: '#aab7c4'
+    // Do not rely on the redirect to the successUrl for fulfilling
+    // purchases, customers may not always reach the success_url after
+    // a successful payment.
+    // Instead use one of the strategies described in
+    // https://stripe.com/docs/payments/checkout/fulfillment
+    successUrl: 'https://natespilman.com',
+    cancelUrl: 'https://natespilman.com/canceled',
+  })
+  .then(function (result) {
+    if (result.error) {
+      // If `redirectToCheckout` fails due to a browser or network
+      // error, display the localized error message to your customer.
+      var displayError = document.getElementById('error-message');
+      displayError.textContent = result.error.message;
     }
-  },
-  invalid: {
-    color: '#fa755a',
-    iconColor: '#fa755a'
-  }
-};
-
-// Create an instance of the card Element.
-var card = elements.create('card', {style: style});
-
-// Add an instance of the card Element into the `card-element` <div>.
-card.mount('#card-element');
+  });
+});
