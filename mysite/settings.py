@@ -56,6 +56,14 @@ REST_FRAMEWORK = {
     )
 }
 
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    dsn="https://3cb0d7474891439399c825834966a9de@sentry.io/1581953",
+    integrations=[DjangoIntegration()]
+)
+
 CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
