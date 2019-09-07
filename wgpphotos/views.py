@@ -7,7 +7,10 @@ from rest_framework.response import Response
 class photos(APIView):
     def get(self, request):
         data = request.GET
-        category = data['category']
+        try:
+            category = data['category']
+        except:
+            category = "photos-wedding"
 
         s3_client = boto3.client(
             's3',
