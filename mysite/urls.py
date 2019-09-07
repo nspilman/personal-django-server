@@ -32,6 +32,8 @@ urlpatterns = [
     path('jdsb/',include('jdsb.urls')),
     path('api/', include(router.urls)),
     path('frontend/',include('frontend.urls')),
+    path('wgpphotos/',include('wgpphotos.urls')),
+    path('bachelorparty/',include('bachelorparty.urls')),
     path("stripe/", include("stripe_application.urls")),
     path("", include("landingpage.urls")),
     # path('travel'),include('TravelBlog.urls')

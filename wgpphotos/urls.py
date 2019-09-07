@@ -6,6 +6,5 @@ from django.conf import settings
 from . import views
 
 urlpatterns = [
-    path('', views.simple, name = 'stripe'),
-    path('donate/<amount>', views.donate, name = 'stripe'),
-]
+    path('', views.photos.as_view(), name = 'photos'),
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
