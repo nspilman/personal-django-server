@@ -19,7 +19,7 @@ ADMINS = [('Nate','Nate.spilman@gmail.com')]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = ['142.93.245.126','localhost:8000','localhost','natespilman.tech','36c2e9c6.ngrok.io']
+ALLOWED_HOSTS = ['142.93.245.126','localhost:8000','localhost','natespilman.tech','https://pioneer-django.herokuapp.com/']
 
 # Application definition
 
@@ -32,13 +32,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'djstripe',
 
     #myApps
     'blogComments',
     'pyrrhic',
     'event_application',
-    'stripe_application',
 ]
 
 REST_FRAMEWORK = {
@@ -50,16 +48,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     )
 }
-
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-
-sentry_sdk.init(
-    dsn="https://3cb0d7474891439399c825834966a9de@sentry.io/1581953",
-    integrations=[DjangoIntegration()]
-)
-
-CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -149,4 +137,13 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(ENV_PATH, 'media/')
 MEDIA_URL = '/media/'
 
-from .local_settings import *
+### SHHHHHHH
+SECRET_KEY = os.environ.get('SECRET_KEY', 'key')
+DEBUG = os.environ.get('DEBUG', False)
+
+EMAIL_HOST = 'smtp.gmail.com'  # since you are using a gmail account
+EMAIL_PORT = 587  # Gmail SMTP port for TLS
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS',"http://localhost:8080").split(',')
