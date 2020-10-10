@@ -22,19 +22,12 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('wlbny/', include('wlbny.urls')),
-    path('travel/',include('TravelBlog.urls')),
-    path('jobhunt/',include('jobhunt.urls')),
-    path('wedding/',include('weddingPlanning.urls')),
     path('pyrrhic/',include('pyrrhic.urls')),
     path('gsheet/',include('googleSheets.urls')),
     path('blog/',include('blogComments.urls')),
     path('events/',include('event_application.urls')),
     path('jdsb/',include('jdsb.urls')),
     path('api/', include(router.urls)),
-    path('frontend/',include('frontend.urls')),
-    path('wgpphotos/',include('wgpphotos.urls')),
-    path('bachelorparty/',include('bachelorparty.urls')),
     path("stripe/", include("stripe_application.urls")),
-    path("", include("landingpage.urls")),
     # path('travel'),include('TravelBlog.urls')
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

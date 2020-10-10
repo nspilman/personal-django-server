@@ -35,15 +35,10 @@ INSTALLED_APPS = [
     'djstripe',
 
     #myApps
-    'weddingPlanning',
-    'TravelBlog',
     'blogComments',
     'pyrrhic',
-    'jobhunt',
     'event_application',
-    'frontend',
     'stripe_application',
-    'bachelorparty'
 ]
 
 REST_FRAMEWORK = {

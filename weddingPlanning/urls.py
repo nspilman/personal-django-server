@@ -1,8 +1,0 @@
-from django.urls import path
-from django.conf.urls import include
-
-from . import views
-
-urlpatterns = [
-    path('', views.weddingDocs.as_view(), name = 'gSheet'),
-]
