@@ -144,18 +144,18 @@ env = environ.Env()
 # reading .env file
 environ.Env.read_env()
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY',env('SECRET_KEY'))
 DEBUG = env('DEBUG')
 
 EMAIL_HOST = 'smtp.gmail.com'  # since you are using a gmail account
 EMAIL_PORT = 587  # Gmail SMTP port for TLS
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-CORS_ALLOWED_ORIGINS = env('CORS_ALLOWED_ORIGINS').split(',')
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER",env('EMAIL_HOST_USER'))
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD",env('EMAIL_HOST_PASSWORD'))
+CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS",env('CORS_ALLOWED_ORIGINS')).split(',')
 
 ### Google Sheets settings
-GSHEET_CONFIG = env("GSHEET_CONFIG")
+GSHEET_CONFIG = os.environ.get("GSHEET_CONFIG",env("GSHEET_CONFIG"))
 try:
     import django_heroku
     django_heroku.settings(locals())
