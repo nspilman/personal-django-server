@@ -19,7 +19,7 @@ ADMINS = [('Nate','Nate.spilman@gmail.com')]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = ['142.93.245.126','localhost:8000','localhost','natespilman.tech','https://pioneer-django.herokuapp.com/']
+ALLOWED_HOSTS = ['142.93.245.126','localhost:8000','localhost','natespilman.tech','pioneer-django.herokuapp.com/']
 
 # Application definition
 
