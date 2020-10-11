@@ -148,6 +148,18 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS',"http://localhost:8080").split(',')
 
+### Google Sheets settings
+SHEET_TYPE = os.environ.get("SHEET_TYPE","service_account")
+SHEET_PROJECT_ID= os.environ.get("SHEET_PROJECT_ID","id")
+SHEET_PRIVATE_KEY_ID = os.environ.get("SHEET_PRIVATE_KEY_ID","key_id")
+SHEET_PRIVATE_KEY = os.environ.get("SHEET_PRIVATE_KEY","key")
+SHEET_CLIENT_EMAIL = os.environ.get("SHEET_CLIENT_EMAIL","email@address.com")
+SHEET_CLIENT_ID = os.environ.get("SHEET_CLIENT_ID","sheet_id")
+SHEET_AUTH_URI = os.environ.get("SHEET_AUTH_URI","URI")
+SHEET_TOKEN_URI = os.environ.get("SHEET_TOKEN_URI","URI")
+SHEET_AUTH_PROVIDER_X509_CERT_URL = os.environ.get("SHEET_AUTH_PROVIDER_X509_CERT_URL","CertUrl")
+SHEET_CLIENT_X509_CERT_URL = os.environ.get("SHEET_CLIENT_X509_CERT_URL","CertUrl")
+
 try:
     import django_heroku
     django_heroku.settings(locals())
