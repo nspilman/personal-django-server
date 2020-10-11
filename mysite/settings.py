@@ -159,7 +159,7 @@ SHEET_AUTH_URI = os.environ.get("SHEET_AUTH_URI","URI")
 SHEET_TOKEN_URI = os.environ.get("SHEET_TOKEN_URI","URI")
 SHEET_AUTH_PROVIDER_X509_CERT_URL = os.environ.get("SHEET_AUTH_PROVIDER_X509_CERT_URL","CertUrl")
 SHEET_CLIENT_X509_CERT_URL = os.environ.get("SHEET_CLIENT_X509_CERT_URL","CertUrl")
-
+GSHEET_CONFIG = os.environ.get("GSHEET_CONFIG",'')
 try:
     import django_heroku
     django_heroku.settings(locals())

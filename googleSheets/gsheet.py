@@ -18,9 +18,11 @@ def create_keyfile_dict():
         "client_x509_cert_url": os.environ.get(settings.SHEET_CLIENT_X509_CERT_URL,"CertUrl")
     }
     return variables_keys
-
+creds = json.loads(os.environ.get('GSHEET_CONFIG'))
+with open('gcreds.json', 'w') as fp:
+    json.dump(creds, fp)
 # use creds to create a client to interact with the Google Drive API
 scope = ['https://spreadsheets.google.com/feeds']
-creds = ServiceAccountCredentials.from_json_keyfile_dict(create_keyfile_dict(), scope)
+creds = ServiceAccountCredentials.from_json_keyfile_dict('gcreds.json', scope)
 client = gspread.authorize(creds)
 
