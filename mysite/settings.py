@@ -145,7 +145,7 @@ env = environ.Env()
 environ.Env.read_env()
 
 SECRET_KEY = os.environ.get('SECRET_KEY',env('SECRET_KEY'))
-DEBUG = env('DEBUG')
+DEBUG = os.environ.get('DEBUG',env('DEBUG'))
 
 EMAIL_HOST = 'smtp.gmail.com'  # since you are using a gmail account
 EMAIL_PORT = 587  # Gmail SMTP port for TLS
