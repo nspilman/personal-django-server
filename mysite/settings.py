@@ -147,3 +147,9 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS',"http://localhost:8080").split(',')
+
+try:
+    import django_heroku
+    django_heroku.settings(locals())
+except:
+    print('django_heroku not installed')
