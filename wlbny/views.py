@@ -1,10 +1,9 @@
 from django.shortcuts import render
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 from rest_framework.response import Response
 import json
 from rest_framework.views import APIView
-from googleSheets.creds import creds, scope, client
+from googleSheets.gsheet import client
 
 def getBusinessArray(endpoint,worksheet):
         workbook = client.open_by_url(endpoint)
@@ -39,7 +38,6 @@ def convertCategoriesToArrays(bidnesses):
 
 class WLBNY(APIView):
     def get(self, request):
-        client = gspread.authorize(creds)
         client.login()
         endpoint = "https://docs.google.com/spreadsheets/d/1OzCkx4MyrcEfGItwthTTIKd28aEbD3YktHUkCYVBg7w"
         worksheet = "bidnesses"

@@ -1,13 +1,9 @@
 from django.shortcuts import render
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 from rest_framework.response import Response
 import json
 from rest_framework.views import APIView
-
-scope = ['https://spreadsheets.google.com/feeds']
-creds = ServiceAccountCredentials.from_json_keyfile_name('googleSheets/weddingWebsite.json', scope)
-client = gspread.authorize(creds)
+from googleSheets.gsheet import client
 
 # Create your views here.
 class getResources(APIView):

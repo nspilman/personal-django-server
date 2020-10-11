@@ -1,17 +1,12 @@
 from django.shortcuts import render
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 from rest_framework.response import Response
 import json
 from rest_framework.views import APIView
-
-scope = ['https://spreadsheets.google.com/feeds']
-creds = ServiceAccountCredentials.from_json_keyfile_name('googleSheets/weddingWebsite.json', scope)
-client = gspread.authorize(creds)
+from googleSheets.gsheet import client
 
 class gsheetData(APIView):
     def get(self,request):
-        client = gspread.authorize(creds)
         client.login()
         sheet = client.open_by_url("https://docs.google.com/spreadsheets/d/17VCNwQLbkSsK0xm2Hq7LaPu1PGlR9zUOGuj5WCppLjw/edit#gid=0")
         videosData = sheet.worksheet("videos")

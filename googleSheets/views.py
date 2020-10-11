@@ -7,13 +7,13 @@ from oauth2client.service_account import ServiceAccountCredentials
 import datetime
 from .sendMail import sendBlogEmail
 import ast
+from googleSheets.gsheet import client
 
 class travelBlog(APIView):
     def get(self, request):
         return Response({"response":'whatsgood?'})
 
     def post(self, request):
-        client = gspread.authorize(creds)
         client.login()
         sheet = client.open_by_url("https://docs.google.com/spreadsheets/d/1B8TWr_Pf5Z34UopHmsUSGhMT0Nmhxg5-OYj_1_sTepM/")
         emailList = sheet.worksheet('emailList')
@@ -25,7 +25,6 @@ class travelBlog(APIView):
 
 class blogMail(APIView):
     def get(self, request):
-        client = gspread.authorize(creds)
         client.login()
         sheet = client.open_by_url("https://docs.google.com/spreadsheets/d/1B8TWr_Pf5Z34UopHmsUSGhMT0Nmhxg5-OYj_1_sTepM/")
         emailList = sheet.worksheet('emailList')
