@@ -23,6 +23,6 @@ with open('gcreds.json', 'w') as fp:
     json.dump(creds, fp)
 # use creds to create a client to interact with the Google Drive API
 scope = ['https://spreadsheets.google.com/feeds']
-creds = ServiceAccountCredentials.from_json_keyfile_dict('gcreds.json', scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name('gcreds.json', scope)
 client = gspread.authorize(creds)
 
