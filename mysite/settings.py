@@ -138,18 +138,24 @@ MEDIA_ROOT = os.path.join(ENV_PATH, 'media/')
 MEDIA_URL = '/media/'
 
 ### SHHHHHHH
-SECRET_KEY = os.environ.get('SECRET_KEY', 'key')
-DEBUG = os.environ.get('DEBUG', False)
+import environ
+
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
+
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env('DEBUG')
 
 EMAIL_HOST = 'smtp.gmail.com'  # since you are using a gmail account
 EMAIL_PORT = 587  # Gmail SMTP port for TLS
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
-CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS',"http://localhost:8080").split(',')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+CORS_ALLOWED_ORIGINS = env('CORS_ALLOWED_ORIGINS').split(',')
 
 ### Google Sheets settings
-GSHEET_CONFIG = os.environ.get("GSHEET_CONFIG",'')
+GSHEET_CONFIG = env("GSHEET_CONFIG")
 try:
     import django_heroku
     django_heroku.settings(locals())
