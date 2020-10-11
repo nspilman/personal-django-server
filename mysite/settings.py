@@ -139,13 +139,14 @@ MEDIA_URL = '/media/'
 
 ### SHHHHHHH
 import environ
+import json
 
 env = environ.Env()
 # reading .env file
 environ.Env.read_env()
 
 SECRET_KEY = os.environ.get('SECRET_KEY',env('SECRET_KEY'))
-DEBUG = os.environ.get('DEBUG',env('DEBUG'))
+DEBUG = json.loads(os.environ.get('DEBUG',env('DEBUG')).lower())
 
 EMAIL_HOST = 'smtp.gmail.com'  # since you are using a gmail account
 EMAIL_PORT = 587  # Gmail SMTP port for TLS
