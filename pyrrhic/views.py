@@ -3,12 +3,12 @@ import gspread
 from rest_framework.response import Response
 import json
 from rest_framework.views import APIView
-from googleSheets.gsheet import client
+from services.googleSheets import googleSheetService
 
 class gsheetData(APIView):
     def get(self,request):
-        client.login()
-        sheet = client.open_by_url("https://docs.google.com/spreadsheets/d/17VCNwQLbkSsK0xm2Hq7LaPu1PGlR9zUOGuj5WCppLjw/edit#gid=0")
+        googleSheetService.login()
+        sheet = googleSheetService.open_by_url("https://docs.google.com/spreadsheets/d/17VCNwQLbkSsK0xm2Hq7LaPu1PGlR9zUOGuj5WCppLjw/edit#gid=0")
         videosData = sheet.worksheet("videos")
         videoNames = videosData.col_values(1)[1:]
         artists = videosData.col_values(2)[1:]

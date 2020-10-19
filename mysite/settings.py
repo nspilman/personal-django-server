@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'blogComments',
     'pyrrhic',
     'event_application',
+    'subscriptions'
 ]
 
 REST_FRAMEWORK = {
@@ -142,7 +143,6 @@ import environ
 import json
 
 env = environ.Env()
-# reading .env file
 environ.Env.read_env()
 
 SECRET_KEY = os.environ.get('SECRET_KEY',env('SECRET_KEY'))

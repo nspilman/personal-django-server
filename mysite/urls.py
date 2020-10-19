@@ -23,11 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('wlbny/', include('wlbny.urls')),
     path('pyrrhic/',include('pyrrhic.urls')),
-    path('gsheet/',include('googleSheets.urls')),
     path('blog/',include('blogComments.urls')),
     path('events/',include('event_application.urls')),
     path('jdsb/',include('jdsb.urls')),
+    path('subscriptions/',include('subscriptions.urls')),
     path('api/', include(router.urls)),
-    path("stripe/", include("stripe_application.urls")),
     # path('travel'),include('TravelBlog.urls')
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

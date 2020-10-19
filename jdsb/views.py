@@ -3,7 +3,7 @@ import gspread
 from rest_framework.response import Response
 import json
 from rest_framework.views import APIView
-from googleSheets.gsheet import client
+from services.googleSheets import googleSheetService
 
 # Create your views here.
 class getResources(APIView):

@@ -3,10 +3,10 @@ import gspread
 from rest_framework.response import Response
 import json
 from rest_framework.views import APIView
-from googleSheets.gsheet import client
+from services.googleSheets import googleSheetService
 
 def getBusinessArray(endpoint,worksheet):
-        workbook = client.open_by_url(endpoint)
+        workbook = googleSheetService.open_by_url(endpoint)
         bidness_worksheet = workbook.worksheet(worksheet)
         bidness_worksheet_values = bidness_worksheet.get_all_values()
         header = [string.lower().replace(" ", "") for string in bidness_worksheet_values[0]]
@@ -38,7 +38,7 @@ def convertCategoriesToArrays(bidnesses):
 
 class WLBNY(APIView):
     def get(self, request):
-        client.login()
+        googleSheetService.login()
         endpoint = "https://docs.google.com/spreadsheets/d/1OzCkx4MyrcEfGItwthTTIKd28aEbD3YktHUkCYVBg7w"
         worksheet = "bidnesses"
         bidnesses = getBusinessArray(endpoint, worksheet)

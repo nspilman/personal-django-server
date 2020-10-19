@@ -84,8 +84,8 @@ target/
 *.pyc
 __pycache__/
 local_settings.py
-weddingWebsite.json
 emailInfo.py
+sheet-credentials.json
 
 .env
 db.sqlite3
