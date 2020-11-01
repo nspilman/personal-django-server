@@ -7,7 +7,7 @@ from services.googleSheets.googleSheetService import getGoogleService
 
 # Create your views here.
 class RoundsMetaData(APIView):
-    def get(self,request):
+    def get(self,request, roundId = None):
         # googleSheetService.login()
         metadata_worksheet_name = "Metadata"
         maininfo_worksheet_name = "MainInfo"
@@ -34,6 +34,10 @@ class RoundsMetaData(APIView):
                 if record[0] == f"{i}_image":
                     image = record[1]
             output.append({"round":round,"title":title,"playlist":playlist, "image": image})
+        print(roundId)
+        if roundId != None:
+            print(output)
+            output = [record for record in output if record['round'] == int(roundId)]
             
         # data = []
         # for record in body:

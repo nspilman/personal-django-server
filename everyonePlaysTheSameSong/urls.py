@@ -7,4 +7,5 @@ from . import views
 
 urlpatterns = [
     path('', views.RoundsMetaData.as_view(), name = 'RoundsMetaData'),
+    path('<roundId>', views.RoundsMetaData.as_view(), name = 'RoundsMetaData'),
 ]
