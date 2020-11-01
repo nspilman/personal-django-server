@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'blogComments',
     'pyrrhic',
     'event_application',
-    'subscriptions'
+    'subscriptions',
+    'everyonePlaysTheSameSong',
 ]
 
 REST_FRAMEWORK = {

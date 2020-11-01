@@ -27,6 +27,7 @@ urlpatterns = [
     path('events/',include('event_application.urls')),
     path('jdsb/',include('jdsb.urls')),
     path('subscriptions/',include('subscriptions.urls')),
+    path('eptss/',include('everyonePlaysTheSameSong.urls')),
     path('api/', include(router.urls)),
     # path('travel'),include('TravelBlog.urls')
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
