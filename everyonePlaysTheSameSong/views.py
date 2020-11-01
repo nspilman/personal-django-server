@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from services.googleSheets.googleSheetService import getGoogleService
 
 # Create your views here.
-class gsheetData(APIView):
+class RoundsMetaData(APIView):
     def get(self,request):
         # googleSheetService.login()
         metadata_worksheet_name = "Metadata"
